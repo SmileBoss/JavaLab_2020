@@ -1,9 +1,11 @@
 package ru.itis;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import ru.itis.jdbc.SimpleDataSource;
+import ru.itis.models.Student;
+import ru.itis.repositories.UserRepository;
+import ru.itis.repositories.UserRepositoryJdbcImpl;
+
+import java.sql.*;
 
 public class Main {
 
@@ -11,32 +13,20 @@ public class Main {
     private static final String USER = "postgres";
     private static final String PASS = "*********";
 
-    public static void main(String[] args) {
-        SimpleDataSource dataSource = new SimpleDataSource();
-        Connection connection = dataSource.openConnection(URL, USER, PASS);
+    public static void main(String[] args) throws SQLException {
+        Connection connection = DriverManager.getConnection(URL, USER, PASS);
+        UserRepository studentRepository = new UserRepositoryJdbcImpl(connection);
+        Student studentTest = new Student(null, "Max", "Blatov", 24, 212);
+//        studentRepository.save(studentTest);
+//        System.out.println(studentRepository.findById(25L));
+////        studentTest.setFirstName("Alex");
+////        studentTest.setAge(26);
+//        System.out.println("Age : " + studentTest.getAge() + ", Name : " + studentTest.getFirstName() + ", ID : " + studentTest.getId());
+//        System.out.println("------------------------");
+////        studentRepository.update(studentTest);
+//        System.out.println(studentRepository.findById(25L));
+        System.out.println(studentRepository.findAllByAge(20));
+        connection.close();
 
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from student");
-
-            while (resultSet.next()){
-                System.out.println("ID: " + resultSet.getInt("id"));
-                System.out.println("First Name: " + resultSet.getString("first_name"));
-                System.out.println("Last Name: " + resultSet.getString("last_name"));
-                System.out.println("Age: " + resultSet.getInt("age"));
-                System.out.println("Group Number: " + resultSet.getInt("group_number"));
-            }
-            System.out.println("-------------------------------");
-            resultSet = statement.executeQuery("select s.id as s_id from student s full outer join mentor m on s.id = m.student_id");
-            while (resultSet.next()){
-                System.out.println("ID" + resultSet.getInt("s_id"));
-            }
-            resultSet.close();
-            statement.close();
-            connection.close();
-        } catch (SQLException e) {
-            throw  new IllegalArgumentException(e);
-        }
     }
-
 }
