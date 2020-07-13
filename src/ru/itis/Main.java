@@ -11,7 +11,7 @@ public class Main {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/homework_1";
     private static final String USER = "postgres";
-    private static final String PASS = "7272An358n";
+    private static final String PASS = "*********";
 
     public static void main(String[] args) throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER, PASS);
