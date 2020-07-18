@@ -5,6 +5,7 @@ ul.submenu {
     padding: 4px 10px;
     margin: 0;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 ul.submenu li {
     display: inline-block;
@@ -68,4 +69,35 @@ ul.submenu li a:hover i.fa-instagram::after {
     position: absolute;
     right: 10%;
     bottom: 5%;
+}
+
+#user_img{
+    display: block;
+    height: auto;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    margin-top: 15px; border: 3px solid #edb021;
+    height: 300px;
+    width: 225px;
+}
+#user_text{
+    margin-left: auto;
+    padding: 10px;
+    margin-right: auto;
+    color: black;
+    position: center;
+    background: #dcdcdc;
+    border-radius: 5px;
+}
+
+#user_tel{
+    text-align: center;
+    margin-top: 15px;
+}
+
+#user_email{
+    text-align: center;
+    margin-top: 15px;
 }
