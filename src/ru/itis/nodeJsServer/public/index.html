@@ -6,12 +6,70 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="http://localhost/social_networks.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
+            integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ=="
+            crossorigin="anonymous"></script>
+
+    <script>
+        function nameUser() {
+            $.getJSON("/index", function (response) {
+                let html = "<a class=\"navbar-brand\">";
+                for (let i = 0; i < response.length; i++) {
+                    html += response[i]["name"] + "/" + response[i]["position"];
+                }
+                html += "</a>";
+                $("#navbar_name_user").append(html);
+            });
+        }
+
+        function imgUser() {
+            $.getJSON("/index", function (response) {
+                let html = "<img id=\"user_img\" src=\"";
+                for (let i = 0; i < response.length; i++) {
+                    html += response[i]["img"] + "\"";
+                }
+                html += " alt=\"it's me\" class=\"shadow-lg\">";
+                $("#user_img_load").append(html);
+            });
+        }
+
+        function textUser() {
+            $.getJSON("/index", function (response) {
+                let html = "<p>";
+                for (let i = 0; i < response.length; i++) {
+                    html += response[i]["text"];
+                }
+                html += "</p>";
+                $("#user_text").append(html);
+            });
+        }
+
+        function telUser() {
+            $.getJSON("/index", function (response) {
+                let html = "<p class=\"h5\">";
+                for (let i = 0; i < response.length; i++) {
+                    html += response[i]["tel"];
+                }
+                html += "</p>";
+                $("#user_tel").append(html);
+            });
+        }
+        function emailUser() {
+            $.getJSON("/index", function (response) {
+                let html = "<p class=\"h5\">";
+                for (let i = 0; i < response.length; i++) {
+                    html += response[i]["email"];
+                }
+                html += "</p>";
+                $("#user_email").append(html);
+            });
+        }
+    </script>
 </head>
-<body class="p-3 mb-2 bg-dark text-white">
+<body class="p-3 mb-2 bg-dark text-white" onload="nameUser(); imgUser(); textUser(); telUser();emailUser()">
 <header style="background: #dcdcdc">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: #dcdcdc">
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#">Nikita Shirmanov/Back-end developer</a>
+        <div id="navbar_name_user" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="position: absolute; right: 20px">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
@@ -27,15 +85,7 @@
     <div class="p-3 mb-2 bg-dark text-white">
         <div class="container">
             <div class="row">
-                <div class="col-6 col-md-4" style="background: #6a655d">
-                    <img src="http://localhost/me.jpg" alt="it's me" class="shadow-lg" height="250" width="225"
-                         style=" display: block;
-                         height: auto;
-                         max-width: 100%;
-                         margin-left: auto;
-                         margin-right: auto;
-                         margin-bottom: 15px;
-                         margin-top: 15px; border: 3px solid #edb021">
+                <div id="user_img_load" class="col-6 col-md-4" style="background: #6a655d">
                 </div>
                 <div class="col-12 col-md-8" style="background: #edb021">
                     <div class="container">
@@ -43,24 +93,14 @@
                             <div class="col9" style="margin-left: auto; margin-right: auto; background: #edb021">
                                 <p class="h3" style="color: #343a40;"><font face="Roboto">Обо мне:</font></p>
                             </div>
-                            <div style="margin-left: auto; padding: 10px; margin-right: auto; color: black; position: center; background: #dcdcdc; border-radius: 5px"
-                                 class="col6">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                    deserunt mollit anim id est laborum.</p>
-                            </div>
+                            <div id="user_text" class="col6"></div>
                         </div>
                         <div class="row" style="color: #343a40">
-                            <div class="col" style="text-align: center; margin-top: 15px">
+                            <div id="user_tel" class="col">
                                 <p class="h4"><font face="Roboto">Телефон</font></p>
-                                <p class="h5" style="color: #343a40">+00001337000</p>
                             </div>
-                            <div class="col" style="text-align: center; margin-top: 15px">
+                            <div id="user_email" class="col">
                                 <p class="h4"><font face="Roboto">Почта</font></p>
-                                <p class="h5" style="color: #343a40">unknown@gmail.com</p>
                             </div>
                             <div class="col" style="text-align: center; margin-top: 15px">
                                 <p class="h4"><font face="Roboto">Соц. сети</font></p>
