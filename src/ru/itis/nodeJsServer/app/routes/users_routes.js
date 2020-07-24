@@ -1,3 +1,6 @@
+bodyParser = require('body-parser');
+
+
 module.exports = function (app) {
     app.get('/index', (request, response) => {
         var result = [{
@@ -10,6 +13,49 @@ module.exports = function (app) {
             "tel": "+00013370000"
         },
         ];
+        response.setHeader("Content-Type", "application/json");
         response.send(JSON.stringify(result));
     });
+
+    const pg = require('pg')
+    const conString = 'pg://postgres:**********@localhost:5432/homework_1';
+
+
+    app.get('/users', function (req, res, next) {
+        pg.connect(conString, function (err, client, done) {
+            if (err) {
+
+                return next(err);
+            }
+            client.query('SELECT * FROM student;', [], function (err, result) {
+                done()
+                if (err) {
+
+                    return next(err);
+                }
+                res.json(result.rows);
+            });
+        });
+    });
+
+
+    app.post('/users', function (req, res, next) {
+        const user = req.body
+        pg.connect(conString, function (err, client, done) {
+            if (err) {
+
+                return next(err)
+            }
+            client.query('INSERT INTO student (first_name, last_name, age, group_number) VALUES ($1, $2, $3, $4);', [user.postName, user.postLastname, user.postAge, user.postGroupNumber], function (err, result) {
+                done()
+                if (err) {
+
+                    return next(err)
+                }
+                res.send(200);
+
+            })
+        })
+    })
+
 };
