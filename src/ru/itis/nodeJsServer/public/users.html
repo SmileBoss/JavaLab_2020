@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://localhost/social_networks.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
+            integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ=="
+            crossorigin="anonymous"></script>
+
+    <script>
+
+        function idUser() {
+            $.getJSON("/users", function (response) {
+                let html = "<tr scope=\"row\">";
+                for (var i = 0; i < response.length; i++) {
+                    html += "<td>" + response[i]['id'] + "</td><td>"
+                        + response[i]['first_name'] + "</td><td>"
+                        + response[i]['last_name'] + "</td><td>"
+                        + response[i]['age'] + "</td><td>"
+                        + response[i]['group_number'] + "</td></tr>";
+                }
+                $("#table_users").append(html);
+            });
+        }
+
+    </script>
+</head>
+<body class="p-3 mb-2 bg-dark text-white" onload="idUser();">
+<header style="background: #dcdcdc">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: #dcdcdc">
+        <div id="navbar_name_user" class="collapse navbar-collapse">
+            <a class="navbar-brand">Users</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="position: absolute; right: 20px">
+                <li class="nav-item active">
+                    <button id="btn_main" onClick='location.href="http://localhost/index.html"' type="button"
+                            class="btn btn-primary">
+                        Главная
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="p-3 mb-2 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="tablo" style="position: center; margin-right: auto; margin-left: auto;">
+                    <table class="table table-hover" style="background: #dcdcdc">
+                        <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Фамилия</th>
+                            <th scope="col">Возраст</th>
+                            <th scope="col">Группа</th>
+                        </tr>
+                        <thead>
+                        <tbody id="table_users">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer style="background: #dcdcdc">
+    <div class="container">
+        <div class="footer-copyright text-center py-3" style="color: black">© 2020 Copyright:
+            <a> Nikita Shirmanov</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

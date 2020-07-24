@@ -101,3 +101,42 @@ ul.submenu li a:hover i.fa-instagram::after {
     text-align: center;
     margin-top: 15px;
 }
+
+#btn_main{
+    background: #edb021;
+    border: #edb021;
+    color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: center;
+    margin-right: 10px;
+}
+
+#btn{
+    background: #edb021;
+    border: #edb021;
+    color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: center;
+}
+
+#btn_two {
+    background: #edb021;
+    border: #edb021;
+    color: black;
+}
+
+#btn_users {
+    background: #edb021;
+    border: #edb021;
+    color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: center;
+    margin-right: 10px;
+}
+
+
+
+
